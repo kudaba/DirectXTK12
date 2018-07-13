@@ -25,6 +25,7 @@
 
 namespace DirectX
 {
+#if _HAS_EXCEPTIONS
     // Helper class for COM exceptions
     class com_exception : public std::exception
     {
@@ -50,7 +51,9 @@ namespace DirectX
             throw com_exception(hr);
         }
     }
-
+#else
+#define ThrowIfFailed(hr) assert(SUCCEEDED(hr))
+#endif
 
     // Helper for output debug tracing
     inline void DebugTrace(_In_z_ _Printf_format_string_ const char* format, ...)

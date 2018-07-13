@@ -19,10 +19,6 @@
 
 using namespace DirectX;
 
-#ifndef _CPPRTTI 
-#error Model requires RTTI
-#endif
-
 
 //--------------------------------------------------------------------------------------
 // ModelMeshPart
@@ -511,17 +507,13 @@ std::vector<std::shared_ptr<IEffect>> Model::CreateEffects(
 
 // Updates effect matrices (if applicable)
 void XM_CALLCONV Model::UpdateEffectMatrices(
-    _In_ std::vector<std::shared_ptr<IEffect>>& effectList,
+    _In_ std::vector<std::shared_ptr<IEffectMatrices>>& effectList,
     DirectX::FXMMATRIX world,
     DirectX::CXMMATRIX view,
     DirectX::CXMMATRIX proj)
 {
     for (auto& fx : effectList)
     {
-        auto matFx = dynamic_cast<IEffectMatrices*>(fx.get());
-        if (matFx)
-        {
-            matFx->SetMatrices(world, view, proj);
-        }
+        fx->SetMatrices(world, view, proj);
     }
 }

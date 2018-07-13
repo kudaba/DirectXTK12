@@ -275,7 +275,7 @@ namespace DirectX
         // Utility function for updating the matrices in a list of effects. This will SetWorld, SetView and SetProjection
         // on any effect in the list that derives from IEffectMatrices.
         static void XM_CALLCONV UpdateEffectMatrices(
-            _In_ std::vector<std::shared_ptr<IEffect>>& effectList,
+            _In_ std::vector<std::shared_ptr<IEffectMatrices>>& effectList,
             DirectX::FXMMATRIX world,
             DirectX::CXMMATRIX view,
             DirectX::CXMMATRIX proj);
